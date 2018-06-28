@@ -1,22 +1,22 @@
 console.log('starting app...');
 
 const fs = require('fs');
-const os = require('os');
 const notes = require('./notes.js');
 const _ = require('lodash');
 
-// var user = os.userInfo()
-// console.log(user);
-//
-// fs.appendFile('foo.txt', `hello ${user.username} you are ${notes.age}\n`, function (err) {
-//     console.log('any error? ', err);
-// })
+var args = process.argv;
 
-var res = notes.add(5, -23)
-console.log(res)
+var command = args[2];
 
-console.log(_.isString(true));
-console.log(_.isString('Footcake'))
+if (command=== 'add') {
+    console.log('adding note');
 
-var filtered = _.uniq([1,2,3,4,1,2,3,4, 'Done'])
-console.log(filtered)
+} else if (command === 'list') {
+    console.log('listing note')
+} else if (command === 'read') {
+    console.log('reading note')
+} else if (command === 'delete') {
+    console.log('deleting note')
+} else {
+    console.log('bad command')
+}
