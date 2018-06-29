@@ -7,11 +7,15 @@ const yargs = require('yargs')
 
 var argv = yargs.argv;
 var command = argv._[0];
-console.log(argv)
+// console.log(argv)
 
 if (command=== 'add') {
-    console.log('adding note');
-    notes.addNote(argv.title, argv.body);
+    var note = notes.addNote(argv.title, argv.body);
+    if (!note) {
+        console.log('Unable to add note. Probably duplicate')
+    } else {
+        console.log("Added title=", argv.title, " and body=", argv.body);
+    }
 
 } else if (command === 'list') {
     notes.getAll()
