@@ -33,3 +33,15 @@ debug>
 (To exit, press ^C again or type .exit)
 debug> 
 ```
+
+# `node --inspect-brk`
+
+This option uses chrome's dev tools
+
+Go to `chrome://inspect`. Open 'dedicated dev tools for node'
+
+```
+node --inspect-brk playground/debugging.js 
+nodemon --inspect-brk playground/debugging.js 
+
+```
