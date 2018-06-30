@@ -5,6 +5,18 @@ request({
     json: true
 }, (error, response, body) => {
 
-    console.log(JSON.stringify(body, undefined, 2))
+    if (response.statusCode === 200) {
+        // console.log(body)
+        if (body && body.results && body.results.length) {
+            console.log(`${body.results[0].formatted_address}`)
+            console.log(`${body.results[0].geometry.location.lat}`)
+            console.log(`${body.results[0].geometry.location.lng}`)
+        } else {
+            console.log(body)
+        }
+    } else {
+        console.log(error)
+        console.log(response)
+    }
 
 })
