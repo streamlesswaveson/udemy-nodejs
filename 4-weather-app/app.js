@@ -21,7 +21,17 @@ request({
     json: true
 }, (error, response, body) => {
 
-    if (response.statusCode === 200) {
+    if (error) {
+        console.log('Unable to connect to Google maps');
+        return;
+    }
+
+    if (body.status === 'ZERO_RESULTS') {
+        console.log('Unable to find results');
+        return;
+    }
+
+    if (response.statusCode === 200 && body.status === 'OK') {
         // console.log(body)
         if (body && body.results && body.results.length) {
             console.log(`${body.results[0].formatted_address}`)
@@ -30,9 +40,6 @@ request({
         } else {
             console.log(body)
         }
-    } else {
-        console.log(error)
-        console.log(response)
     }
 
 })
