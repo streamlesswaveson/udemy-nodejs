@@ -1,9 +1,13 @@
 const request = require('request');
+const fs = require('fs');
+
+const googlekey= fs.readFileSync(('geocode/.google'));
 
 var geocodeAddress = (addr, callback) => {
     var address = encodeURIComponent(addr);
     request({
         url: `https://maps.googleapis.com/maps/api/geocode/json?address=${address}`,
+        // url: `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${googlekey}`,
         json: true
     }, (error, response, body) => {
 
