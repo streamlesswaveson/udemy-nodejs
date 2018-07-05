@@ -1,21 +1,25 @@
 const express = require('express')
+const hbs = require('hbs')
 
 var app = express()
+
+app.set('view engine', 'hbs')
 
 app.use(express.static(__dirname + '/public'))
 
 app.get('/', (req, res) => {
-    // res.send('<h1>hello express</h1>')
-
-    res.send({
-        hello:'world',
-        things: ['this', 'that']
-
+    res.render('welcome.hbs', {
+        pageTitle: 'Welcome',
+        currentYear: new Date().getFullYear(),
+        welcomeMessage: 'Hello message'
     })
 });
 
 app.get('/about', (req, res) => {
-    res.send('<h1>about page</h1>')
+    res.render('about.hbs',{
+        pageTitle: 'About Page',
+        currentYear: new Date().getFullYear()
+    })
 })
 
 app.get('/bad', (req, res) => {
