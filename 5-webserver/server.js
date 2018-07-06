@@ -22,9 +22,9 @@ app.use((req, res, next) => {
 });
 
 // the relative placement of this is important - they are fired in the order used here.
-app.use((req, res, next) => {
-    res.render('maintenance.hbs');
-});
+// app.use((req, res, next) => {
+//     res.render('maintenance.hbs');
+// });
 
 app.use(express.static(__dirname + '/public'))
 
