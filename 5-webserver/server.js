@@ -46,16 +46,22 @@ app.get('/', (req, res) => {
 
 app.get('/about', (req, res) => {
     res.render('about.hbs',{
-        pageTitle: 'About Page'
+        pageTitle: 'About'
     })
-})
+});
 
 app.get('/bad', (req, res) => {
     res.status(400).send({
         status: 400,
         message: 'bad request'
     })
-})
+});
+
+app.get('/portfolio', (req, res)=> {
+    res.render('portfolio.hbs', {
+        pageTitle: 'Portfolio'
+    })
+});
 
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
