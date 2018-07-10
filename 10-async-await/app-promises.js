@@ -77,23 +77,49 @@ const getStatus = (userId) => {
             return getGrades(user.schoolId)
         })
         .then((grades) => {
-            //average
-            let average = 0;
-            if (grades.length > 0) {
-                average = grades.map((g) => g.grade).reduce((a, b) => {
-                    return a + b;
-                }) / grades.length;
 
-                console.log(average);
-            }
-            // return the string
-            return `${myUser.name} has a ${average} in the class`;
+            return formatResult(myUser, grades);
+            //average
+            // let average = 0;
+            // if (grades.length > 0) {
+            //     average = grades.map((g) => g.grade).reduce((a, b) => {
+            //         return a + b;
+            //     }) / grades.length;
+            //
+            //     console.log(average);
+            // }
+            // return `${myUser.name} has a ${average} in the class`;
         })
 };
-getStatus(1)
-    .then((status) => {
-        console.log(status);
-    })
-    .catch((err) => {
-        console.log(err);
-    })
+
+const formatResult = (myUser, grades) => {
+    let average = 0;
+    if (grades.length > 0) {
+        average = grades.map((g) => g.grade).reduce((a, b) => {
+            return a + b;
+        }) / grades.length;
+
+        console.log(average);
+    }
+    // return the string
+    return `${myUser.name} has a ${average} in the class`;
+}
+
+// adding the async keyword creates a promise and resolves
+const getStatusAlt = async (userId) => {
+    // await can only be used in an async function
+    const user = await getUser(userId);
+    const grades = await getGrades(user.schoolId)
+    return formatResult(user, grades);
+};
+
+getStatusAlt(1)
+    .then((r) => console.log(r))
+    .catch((e) => console.log(e));
+// getStatus(1)
+//     .then((status) => {
+//         console.log(status);
+//     })
+//     .catch((err) => {
+//         console.log(err);
+//     })
