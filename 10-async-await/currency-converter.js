@@ -22,15 +22,27 @@ const baseUrl = `http://data.fixer.io/api/latest?access_key=${fixerApiKey}&forma
 // };
 
 const getExchangeRate = async (from, to) => {
-    const response = await axios.get(baseUrl);
-    const euro = 1 / response.data.rates[from];
-    const rate = euro * response.data.rates[to];
-    return rate;
+    try {
+        const response = await axios.get(baseUrl);
+        const euro = 1 / response.data.rates[from];
+        const rate = euro * response.data.rates[to];
+        return rate;
+    }catch (e) {
+        const errmessage = `Unable to resolve exchange rate for ${from} and ${to}`;
+        // console.log(errmessage, e);
+        throw new Error(errmessage);
+    }
 };
 
 const getCountries = async (currencyCode) => {
-    const response = await axios.get(`https://restcountries.eu/rest/v2/currency/${currencyCode}`)
-    return response.data.map((i)=> i.name)
+    try {
+        const response = await axios.get(`https://restcountries.eu/rest/v2/currency/${currencyCode}`)
+        return response.data.map((i) => i.name)
+    }catch(e) {
+        const errmessage = `Unable to resolve currencyCode ${currencyCode}`
+        // console.log(errmessage, e);
+        throw new Error(errmessage);
+    }
 };
 
 // getExchangeRate('USD', 'CAD').then((rate) => {

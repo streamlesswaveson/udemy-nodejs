@@ -29,4 +29,7 @@ const argv = yargs
 
 converter.convertCurrency(argv.from,argv.to, argv.amount).then((result) => {
     console.log(result);
-});
+})
+    .catch((err) => {
+        console.log('Something failed ', err);
+    });
